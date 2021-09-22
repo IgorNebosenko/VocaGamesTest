@@ -8,12 +8,14 @@ namespace Game.Core.Ablilities
 
         public void Init(AbilityData data)
         {
-            throw new System.NotImplementedException();
+            //TODO: Init
+            //throw new System.NotImplementedException();
         }
 
         public void Execute()
         {
-            throw new System.NotImplementedException();
+            //TODO: Execute
+            //throw new System.NotImplementedException();
         }
     }
 }
