@@ -19,7 +19,7 @@ MonoBehaviour:
     requiredValueType: 1
     requiredValue: 3
   - typeAbility: 0
-    additionalParamJson: '{targetColor:"0,255,0"}'
+    additionalParamJson: '{"targetColor":{"r":0.0,"g":1.0,"b":0.0,"a":1.0}}'
     triggerAbility: 0
     requiredValueType: 0
     requiredValue: 3

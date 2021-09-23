@@ -1,7 +1,4 @@
-using Game.Core.Ablilities;
-using Game.Core.Interfaces;
 using Game.Core.MoveSystem;
-using Game.ScriptableObjects.Abilities;
 using Game.Singletones;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,8 +41,6 @@ namespace Game.Controllers
 
         private void Update()
         {
-            //TODO: new system of ability
-
             _timePassed += Time.deltaTime;
 
             if (_timePassed >= _timeInterpolation)
@@ -53,18 +48,14 @@ namespace Game.Controllers
                 _timePassed = 0f;
 
                 var moveData = MoveData.GenerateRandom();
-                //var ability = GetAbility();
 
                 _queueCurrentMoves.Enqueue(moveData);
-                //_queueCurrentAbilites.Enqueue(ability);
 
                 _playerController.MoveTo(moveData);
-                //_playerController.SetAbility(ability);
 
                 if (_queueMoves.Count != 0)
                 {
                     _twinController.MoveTo(_queueMoves.Dequeue());
-                    //_twinController.SetAbility(_queueAbilities.Dequeue());
                 }
             }
         }

@@ -12,5 +12,7 @@ namespace Game.ScriptableObjects.Settings
         public float maxSpeed = 5f;
         [Space]
         public float timeInterpolation = 1f;
+        [Space]
+        public KeyCode buttonRespawn = KeyCode.R;
     }
 }

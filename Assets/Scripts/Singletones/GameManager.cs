@@ -1,10 +1,6 @@
 using Game.Controllers;
-using Game.Core;
-using Game.Core.Interfaces;
-using Game.Core.MoveSystem;
 using Game.ScriptableObjects.Abilities;
 using Game.ScriptableObjects.Settings;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Singletones

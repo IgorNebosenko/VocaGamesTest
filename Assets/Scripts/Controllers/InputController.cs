@@ -1,3 +1,4 @@
+using Game.Singletones;
 using System;
 using UnityEngine;
 
@@ -5,9 +6,14 @@ namespace Game.Controllers
 {
     public class InputController : MonoBehaviour
     {
-        [SerializeField] private KeyCode _keyCodeRespawn = KeyCode.R;
+        private KeyCode _keyCodeRespawn;
 
         public event Action buttonRespawnClicked;
+
+        private void Start()
+        {
+            _keyCodeRespawn = GameManager.GameManagerInstance.SettingsConfig.buttonRespawn;
+        }
 
         private void Update()
         {

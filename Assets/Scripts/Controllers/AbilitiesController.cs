@@ -2,7 +2,6 @@ using Game.Core.Ablilities;
 using Game.Core.Interfaces;
 using Game.ScriptableObjects.Abilities;
 using Game.Events;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Core.MoveSystem;
@@ -11,7 +10,6 @@ namespace Game.Controllers
 {
     public class AbilitiesController : MonoBehaviour
     {
-        //Not an array because we can have unhandled types of abilities 
         private List<IAbility> _listAvailableAbilities;
         private float _reachedDistance;
 

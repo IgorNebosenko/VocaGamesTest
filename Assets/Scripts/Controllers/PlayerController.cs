@@ -1,4 +1,3 @@
-using Game.Core.Interfaces;
 using Game.Core.MoveSystem;
 using Game.Singletones;
 using System.Collections;
@@ -8,7 +7,7 @@ namespace Game.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer renderer;
+        [SerializeField] private new MeshRenderer renderer;
 
         private Vector3 _previousPosition;
         private Vector3 _originPosition;
