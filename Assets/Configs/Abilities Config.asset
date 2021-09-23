@@ -12,3 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd074e66ad60db46b4bf79214d91be5, type: 3}
   m_Name: Abilities Config
   m_EditorClassIdentifier: 
+  listAbilities:
+  - typeAbility: 0
+    additionalParamJson: 
+    triggerAbility: 1
+    requiredValueType: 1
+    requiredValue: 3
+  - typeAbility: 0
+    additionalParamJson: '{targetColor:"0,255,0"}'
+    triggerAbility: 0
+    requiredValueType: 0
+    requiredValue: 3

@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 1901977322}
   - component: {fileID: 1901977321}
   - component: {fileID: 1901977323}
+  - component: {fileID: 1901977324}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -388,6 +389,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootPlayers: {fileID: 964988428}
   playerPrefab: {fileID: 3929825478407121633, guid: bab008accdb8ee44ab1b909239436198, type: 3}
+--- !u!114 &1901977324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901977320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93f43e7f967c774cb3227816b8e50d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1907203852
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 1901977321}
   gameplayController: {fileID: 1901977323}
+  abilitiesController: {fileID: 1901977324}
   abilitiesConfig: {fileID: 11400000, guid: 8159ef2bbc868484e807fa8ed9bd1b2f, type: 2}
   settingsConfig: {fileID: 11400000, guid: 8d2ed3a4796265e4f9453d7f1ce29631, type: 2}
 --- !u!4 &1907203855

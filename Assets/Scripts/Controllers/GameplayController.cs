@@ -13,11 +13,6 @@ namespace Game.Controllers
         [SerializeField] private Transform rootPlayers;
         [SerializeField] private PlayerController playerPrefab;
 
-        private List<IAbility> _listAvailableAbilities;
-
-        private Queue<IAbility> _queueAbilities;
-        private Queue<IAbility> _queueCurrentAbilites;
-
         private Queue<MoveData> _queueMoves;
         private Queue<MoveData> _queueCurrentMoves;
 
@@ -27,7 +22,7 @@ namespace Game.Controllers
         private float _timeInterpolation;
         private float _timePassed;
 
-        private void Start()
+        public void Init()
         {
             GameManager.GameManagerInstance.InputController.buttonRespawnClicked += OnRespawnButtonClicked;
 
@@ -35,11 +30,6 @@ namespace Game.Controllers
             _twinController ??= SpawnPlayer(true);
 
             _twinController.gameObject.SetActive(false);
-
-            _listAvailableAbilities = new List<IAbility>();
-
-            _queueAbilities = new Queue<IAbility>();
-            _queueCurrentAbilites = new Queue<IAbility>();
 
             _queueMoves = new Queue<MoveData>();
             _queueCurrentMoves = new Queue<MoveData>();
@@ -54,6 +44,8 @@ namespace Game.Controllers
 
         private void Update()
         {
+            //TODO: new system of ability
+
             _timePassed += Time.deltaTime;
 
             if (_timePassed >= _timeInterpolation)
@@ -61,26 +53,20 @@ namespace Game.Controllers
                 _timePassed = 0f;
 
                 var moveData = MoveData.GenerateRandom();
-                var ability = GetAbility();
+                //var ability = GetAbility();
 
                 _queueCurrentMoves.Enqueue(moveData);
-                _queueCurrentAbilites.Enqueue(ability);
+                //_queueCurrentAbilites.Enqueue(ability);
 
                 _playerController.MoveTo(moveData);
-                _playerController.SetAbility(ability);
+                //_playerController.SetAbility(ability);
 
                 if (_queueMoves.Count != 0)
                 {
                     _twinController.MoveTo(_queueMoves.Dequeue());
-                    _twinController.SetAbility(_queueAbilities.Dequeue());
+                    //_twinController.SetAbility(_queueAbilities.Dequeue());
                 }
             }
-        }
-
-        public void SetAbilities(List<AbilityData> data)
-        {
-            //TODO: convert data to abilities
-            //_listAvailableAbilities = data;
         }
 
         private void OnRespawnButtonClicked()
@@ -90,8 +76,7 @@ namespace Game.Controllers
             _queueMoves = _queueCurrentMoves;
             _queueCurrentMoves = new Queue<MoveData>();
 
-            _queueAbilities = _queueCurrentAbilites;
-            _queueCurrentAbilites = new Queue<IAbility>();
+            GameManager.GameManagerInstance.AbilitiesController.Respawn();
 
             _playerController.InterruptMove();
             _twinController.InterruptMove();
@@ -105,17 +90,9 @@ namespace Game.Controllers
             var player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, rootPlayers)
                 .GetComponent<PlayerController>();
 
-            if (isTwin)
-            {
-                player.SetColor(Color.black);
-            }
+            player.Init(isTwin);
 
             return player;
-        }
-
-        private IAbility GetAbility()
-        {
-            return new ChangeColorAbility();
         }
     }
 }

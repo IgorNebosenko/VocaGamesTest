@@ -10,6 +10,7 @@ namespace Game.Controllers
     {
         [SerializeField] private MeshRenderer renderer;
 
+        private Vector3 _previousPosition;
         private Vector3 _originPosition;
         private Vector3 _targetPosition;
         private float _moveTime;
@@ -17,20 +18,38 @@ namespace Game.Controllers
         private float _timeInterpolation = 1f;
         private Coroutine _executedCoroutine;
 
+        private bool _isTwin;
+
         private void Start()
         {
             _timeInterpolation = GameManager.GameManagerInstance.SettingsConfig.timeInterpolation;
         }
 
-        public void SetColor(Color color)
+        public void Init(bool isTwin)
         {
-            //TODO: Remove this method!
-            renderer.material.color = color;
+            _isTwin = isTwin;
+
+            if (!_isTwin)
+            {
+                GameManager.GameManagerInstance.AbilitiesController.InitPlayer(this);
+            }
+            else
+            {
+                GameManager.GameManagerInstance.AbilitiesController.InitTwin(this);
+            }
         }
 
-        public void SetAbility(IAbility ability)
+        private void OnDestroy()
         {
-            ability.Execute();
+            if (!_isTwin)
+            {
+                GameManager.GameManagerInstance.AbilitiesController.ClearPlayerEvents();
+            }
+        }
+
+        public void SetColor(Color color)
+        {
+            renderer.material.color = color;
         }
 
         public void MoveTo(MoveData data)
@@ -49,16 +68,28 @@ namespace Game.Controllers
             _originPosition = transform.position;
             _moveTime = 0;
 
+            if (!_isTwin)
+            {
+                GameManager.GameManagerInstance.AbilitiesController.SetSpeed(data.speed);
+            }
+
             _executedCoroutine = StartCoroutine(InterpolatedMove());
         }
 
         private IEnumerator InterpolatedMove()
         {
-            Debug.Log("called coroutine");
             while (Vector3.Distance(transform.position, _targetPosition) > 0)
             {
                 _moveTime += Time.deltaTime;
+                _previousPosition = transform.position;
                 transform.position = Vector3.Lerp(_originPosition, _targetPosition, _moveTime / _timeInterpolation);
+                
+                if (!_isTwin)
+                { 
+                    GameManager.GameManagerInstance.AbilitiesController.
+                        AddReachedDistance(Vector3.Distance(_previousPosition, transform.position));
+                }
+
                 yield return null;
             }
         }

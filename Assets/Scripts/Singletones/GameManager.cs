@@ -13,6 +13,7 @@ namespace Game.Singletones
     {
         [SerializeField] private InputController inputController;
         [SerializeField] private GameplayController gameplayController;
+        [SerializeField] private AbilitiesController abilitiesController;
         [Space]
         [SerializeField] private AblitiesConfig abilitiesConfig;
         [SerializeField] private SettingsConfig settingsConfig;
@@ -21,6 +22,7 @@ namespace Game.Singletones
 
         public static GameManager GameManagerInstance => gameManagerInstance;
         public InputController InputController => inputController;
+        public AbilitiesController AbilitiesController => abilitiesController;
         public SettingsConfig SettingsConfig => settingsConfig;
 
         private void Awake()
@@ -30,7 +32,8 @@ namespace Game.Singletones
 
         private void Start()
         {
-            gameplayController.SetAbilities(abilitiesConfig.ListAbilities);
+            abilitiesController.SetAbilities(abilitiesConfig.ListAbilities);
+            gameplayController.Init();
         }
     }
 }
